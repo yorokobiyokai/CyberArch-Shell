@@ -233,6 +233,15 @@ App.start({
  } else if (request === "notif-hud") {
  try { toggleNotifHud() } catch (e) { print(e) }
  reply("ok")
+ } else if (request === "dnd-on") {
+ try { AstalNotifd.get_default().set_dont_disturb(true); reply("on") }
+ catch (e) { print(e); reply("error") }
+ } else if (request === "dnd-off") {
+ try { AstalNotifd.get_default().set_dont_disturb(false); reply("off") }
+ catch (e) { print(e); reply("error") }
+ } else if (request === "dnd-status") {
+ try { reply(AstalNotifd.get_default().get_dont_disturb() ? "on" : "off") }
+ catch (e) { print(e); reply("error") }
  } else if (request === "dismiss-notifs") {
  try {
  const nd = AstalNotifd.get_default()
